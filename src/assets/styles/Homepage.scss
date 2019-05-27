@@ -1,0 +1,14 @@
+@import "./global.scss";
+
+.home-page {
+    .last-posts {
+        .square {
+            background-color: $div-backgroud;
+            margin: 1rem;
+            img {
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+}

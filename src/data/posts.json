@@ -1,0 +1,90 @@
+[
+    {
+        "id": "1",
+        "title": "Uczta w malinowej",
+        "text": "lorem ipsum",
+        "data": "2012-04-23T18:25:43.511Z",
+        "city": "Lubin",
+        "street": "wesoła 3",
+        "rating": "5",
+        "image": "post1.png",
+        "type": "bary i puby"
+    },
+    {
+        "id": "2",
+        "title": "Tanio i smacznie",
+        "text": "lorem ipsum",
+        "data": "2012-04-23T18:25:43.511Z",
+        "city": "Lubin",
+        "street": "wesoła 3",
+        "rating": "5",
+        "image": "post2.png",
+        "type": "piekarnia"
+    },
+    {
+        "id": "3",
+        "title": "Super obsługa",
+        "text": "lorem ipsum",
+        "data": "2012-04-23T18:25:43.511Z",
+        "city": "Lubin",
+        "street": "wesoła 3",
+        "rating": "5",
+        "image": "post3.png",
+        "type": "kawiarnia"
+    },
+    {
+        "id": "4",
+        "title": "Mało, a szkoda",
+        "text": "lorem ipsum",
+        "data": "2012-04-23T18:25:43.511Z",
+        "city": "Lubin",
+        "street": "wesoła 3",
+        "rating": "5",
+        "image": "post4.png",
+        "type": "restauracja"
+    },
+    {
+        "id": "5",
+        "title": "Lokal za mały",
+        "text": "lorem ipsum",
+        "data": "2012-04-23T18:25:43.511Z",
+        "city": "Lubin",
+        "street": "wesoła 3",
+        "rating": "5",
+        "image": "post5.png",
+        "type": "cukiernia"
+    },
+    {
+        "id": "6",
+        "title": "Głośno i imprezowo",
+        "text": "lorem ipsum",
+        "data": "2012-04-23T18:25:43.511Z",
+        "city": "Lubin",
+        "street": "wesoła 3",
+        "rating": "5",
+        "image": "post6.png",
+        "type": "bary i puby"
+    },
+    {
+        "id": "7",
+        "title": "Na kaca w sam raz",
+        "text": "lorem ipsum",
+        "data": "2012-04-23T18:25:43.511Z",
+        "city": "Lubin",
+        "street": "wesoła 3",
+        "rating": "5",
+        "image": "post7.png",
+        "type": "Bary z przekąskami"
+    },
+    {
+        "id": "8",
+        "title": "Dobre jedzonko w Legnicy",
+        "text": "lorem ipsum",
+        "data": "2012-04-23T18:25:43.511Z",
+        "city": "Lubin",
+        "street": "wesoła 3",
+        "rating": "5",
+        "image": "post8.png",
+        "type": "restauracja"
+    }
+]

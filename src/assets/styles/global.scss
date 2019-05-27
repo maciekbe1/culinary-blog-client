@@ -1,0 +1,11 @@
+$dark-backgroud: #222227;
+$div-backgroud: #34333b;
+$text: #646465;
+
+.App {
+    font-family: "Lato", sans-serif;
+}
+.dark-theme > * {
+    background-color: $dark-backgroud;
+    color: #fff;
+}
