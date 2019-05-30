@@ -56,7 +56,7 @@ export default function Navigation(props) {
                                 </a>
                             ) : null}
                             <li className="nav-item active">
-                                <Link className="nav-link" to="/all-posts">
+                                <Link className="nav-link" to="/posts">
                                     Posty{" "}
                                     <span className="sr-only">(current)</span>
                                 </Link>
