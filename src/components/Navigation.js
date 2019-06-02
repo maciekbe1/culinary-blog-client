@@ -8,16 +8,16 @@ import Signin from "./Auth/Signin";
 
 export default function Navigation(props) {
     const context = useContext(Context);
-    const { dispatch } = useContext(Context);
-    const onSignOut = () => {
-        dispatch({
-            type: "SIGNOUT_USER",
-            payload: {
-                isAuth: false,
-                currentUser: null
-            }
-        });
-    };
+    // const { dispatch } = useContext(Context);
+    // const onSignOut = () => {
+    //     dispatch({
+    //         type: "SIGNOUT_USER",
+    //         payload: {
+    //             isAuth: false,
+    //             currentUser: null
+    //         }
+    //     });
+    // };
 
     return (
         <div className="">
