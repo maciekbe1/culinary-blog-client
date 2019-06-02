@@ -1,19 +1,39 @@
 import React from "react";
-// import parse from "html-react-parser";
-
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
+import GoogleFrame from "../Posts/GoogleFrame";
+const POST_QUERY = gql`
+    query postQuery($id: String!) {
+        getPost(id: $id) {
+            title
+            city
+            street
+        }
+    }
+`;
 export default function Post(props) {
-    // console.log(props);
-    // const address = `${post.city} ${post.street}`;
-    // const encode = encodeURIComponent(address);
-    // const map = `<iframe
-    //         width="700"
-    //         height="440"
-    //         src="https://maps.google.com/maps?width=700&amp;height=440&amp;hl=en&amp;q=${encode}+(Tytu%C5%82)&amp;ie=UTF8&amp;t=k&amp;z=12&amp;iwloc=B&amp;output=embed"
-    //         frameborder="0"
-    //         scrolling="no"
-    //         marginheight="0"
-    //         marginwidth="0"
-    //         title="map"
-    //     />`;
-    return <div className="post" />;
+    const { id } = props.match.params;
+    return (
+        <div className="post">
+            <Query query={POST_QUERY} variables={{ id }}>
+                {({ loading, error, data }) => {
+                    if (loading) return <h2>Loading...</h2>;
+                    if (error) console.log(error);
+                    console.log(data);
+                    return (
+                        <div>
+                            <h1>{data.getPost.title}</h1>
+                            <GoogleFrame
+                                city={data.getPost.city}
+                                street={data.getPost.street}
+                            />
+                            <p>{data.getPost.city}</p>
+                            <p>{data.getPost.street}</p>
+                            <p>{id}</p>
+                        </div>
+                    );
+                }}
+            </Query>
+        </div>
+    );
 }

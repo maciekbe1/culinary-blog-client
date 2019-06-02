@@ -1,26 +1,39 @@
 import React from "react";
-import data from "../../data/posts";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
+
+import image from "../../assets/images/posts/post1.png";
+
+const POSTS_QUERY = gql`
+    query {
+        posts {
+            id
+            title
+        }
+    }
+`;
 
 export default function LastPosts() {
     return (
         <div className="last-posts container">
             <h2 className="text-center">Ostatnie posty</h2>
             <div className="row text-center">
-                {data.slice(0, 3).map(post => {
-                    return (
-                        <div key={post.id} className="col-xl-4 col-md-6">
-                            <div className="square">
-                                <img
-                                    src={require(`../../assets/images/posts/${
-                                        post.image
-                                    }`)}
-                                    alt=""
-                                />
-                                <h3>{post.title}</h3>
-                            </div>
-                        </div>
-                    );
-                })}
+                <Query query={POSTS_QUERY}>
+                    {({ loading, error, data }) => {
+                        if (loading) return <h2>Loading..</h2>;
+                        if (error) console.log(error);
+                        return data.posts.map((post, index) => {
+                            return (
+                                <div key={index} className="col-xl-4 col-md-6">
+                                    <div className="square">
+                                        <img src={image} alt="" />
+                                        <h3>{post.title}</h3>
+                                    </div>
+                                </div>
+                            );
+                        });
+                    }}
+                </Query>
             </div>
         </div>
     );

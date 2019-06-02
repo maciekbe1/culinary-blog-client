@@ -8,7 +8,7 @@ import Navigation from "./components/Navigation";
 
 import Homepage from "./pages/Homepage";
 // import ProtectedRoute from "./pages/ProtectedRoute";
-import AllPosts from "./pages/Posts";
+import Posts from "./pages/Posts";
 import Post from "./components/Posts/Post";
 
 import Context from "./context";
@@ -36,7 +36,7 @@ function App(props) {
                                 render={render => <Homepage {...render} />}
                             />
                             <Route path="/posts/post/:id" component={Post} />
-                            <Route path="/posts" component={AllPosts} />
+                            <Route path="/posts" component={Posts} />
                         </Switch>
                         <Footer />
                     </BrowserRouter>

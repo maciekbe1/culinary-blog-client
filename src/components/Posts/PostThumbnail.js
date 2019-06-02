@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import image from "../../assets/images/posts/post1.png";
-import Moment from "react-moment";
+import { dateConverter } from "../../containers/dateConverter";
 export default function PostThumbnail(props) {
     return (
         <div className="post border border-secondary mb-3 p-3">
@@ -22,10 +22,7 @@ export default function PostThumbnail(props) {
                             <h2>{props.data.title}</h2>
                             <div className="row">
                                 <p className="col-sm-4">
-                                    Data:{" "}
-                                    <Moment format="YYYY/MM/DD">
-                                        {props.data.date}
-                                    </Moment>
+                                    Data: {dateConverter(props.data.date)}
                                 </p>
                                 <p className="col-sm-4">
                                     Gdzie: {" " + props.data.city}
@@ -33,8 +30,9 @@ export default function PostThumbnail(props) {
                             </div>
                         </div>
                         <div>
+                            <p>{props.data.id}</p>
                             <p>{props.data.text}</p>
-                            <Link to={`/post/${props.data.title}`}>
+                            <Link to={`/posts/post/${props.data.id}`}>
                                 Przeczytaj
                             </Link>
                         </div>
