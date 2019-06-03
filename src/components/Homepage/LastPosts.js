@@ -7,7 +7,7 @@ import image from "../../assets/images/posts/post1.png";
 const POSTS_QUERY = gql`
     query {
         posts {
-            id
+            _id
             title
         }
     }

@@ -3,8 +3,8 @@ import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import GoogleFrame from "../Posts/GoogleFrame";
 const POST_QUERY = gql`
-    query postQuery($id: String!) {
-        getPost(id: $id) {
+    query postQuery($id: ID!) {
+        getPost(_id: $id) {
             title
             city
             street
@@ -19,7 +19,6 @@ export default function Post(props) {
                 {({ loading, error, data }) => {
                     if (loading) return <h2>Loading...</h2>;
                     if (error) console.log(error);
-                    console.log(data);
                     return (
                         <div>
                             <h1>{data.getPost.title}</h1>

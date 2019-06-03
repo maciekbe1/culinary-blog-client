@@ -7,7 +7,7 @@ import { Query } from "react-apollo";
 const POSTS_QUERY = gql`
     query {
         posts {
-            id
+            _id
             title
             text
             date

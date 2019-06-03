@@ -30,9 +30,9 @@ export default function PostThumbnail(props) {
                             </div>
                         </div>
                         <div>
-                            <p>{props.data.id}</p>
+                            <p>{props.data._id}</p>
                             <p>{props.data.text}</p>
-                            <Link to={`/posts/post/${props.data.id}`}>
+                            <Link to={`/posts/post/${props.data._id}`}>
                                 Przeczytaj
                             </Link>
                         </div>
