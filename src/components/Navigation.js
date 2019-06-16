@@ -8,16 +8,16 @@ import Signin from "./Auth/Signin";
 
 export default function Navigation(props) {
     const context = useContext(Context);
-    // const { dispatch } = useContext(Context);
-    // const onSignOut = () => {
-    //     dispatch({
-    //         type: "SIGNOUT_USER",
-    //         payload: {
-    //             isAuth: false,
-    //             currentUser: null
-    //         }
-    //     });
-    // };
+    const { dispatch } = useContext(Context);
+    const onSignOut = () => {
+        dispatch({
+            type: "SIGNOUT_USER",
+            payload: {
+                isAuth: false,
+                currentUser: null
+            }
+        });
+    };
 
     return (
         <div className="">
@@ -51,7 +51,7 @@ export default function Navigation(props) {
                                 >
                                     Logged in as:{" "}
                                     <span className="logged-as-name">
-                                        {context.state.currentUser}
+                                        {context.state.login}
                                     </span>
                                 </a>
                             ) : null}
@@ -86,18 +86,32 @@ export default function Navigation(props) {
                                         Action
                                     </Link>
                                     {context.state.isAuth ? (
-                                        <Link to="/panel">Panel</Link>
+                                        <Link
+                                            className="dropdown-item"
+                                            to="/panel"
+                                        >
+                                            Panel
+                                        </Link>
                                     ) : null}
                                     <div className="dropdown-divider" />
-                                    <Link
-                                        className="dropdown-item"
-                                        to="/"
-                                        data-toggle="modal"
-                                        data-target="#loginModal"
-                                        onClick={e => e.preventDefault()}
-                                    >
-                                        Zaloguj
-                                    </Link>
+                                    {!context.state.isAuth ? (
+                                        <button
+                                            className="dropdown-item"
+                                            to="/"
+                                            data-toggle="modal"
+                                            data-target="#loginModal"
+                                            onClick={e => e.preventDefault()}
+                                        >
+                                            Zaloguj
+                                        </button>
+                                    ) : (
+                                        <button
+                                            className="dropdown-item"
+                                            onClick={onSignOut}
+                                        >
+                                            Wyloguj
+                                        </button>
+                                    )}
                                 </div>
                             </li>
                         </ul>
