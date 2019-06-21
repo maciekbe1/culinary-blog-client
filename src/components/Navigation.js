@@ -48,7 +48,7 @@ export default function Navigation(props) {
                                     onClick={e => e.preventDefault()}
                                 >
                                     Logged in as:{" "}
-                                    <span className="logged-as-name">
+                                    <span className="logged-as-name text-success">
                                         {context.state.login}
                                     </span>
                                 </a>

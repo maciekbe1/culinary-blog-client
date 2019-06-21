@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import Context from "../../context";
 import Error from "../Error";
 import gql from "graphql-tag";
@@ -16,23 +16,6 @@ export default function Signin() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
-    useEffect(() => {
-        if (isAuthenticated().isAuth) {
-            dispatch({
-                type: "SIGNIN_USER",
-                payload: {
-                    isAuth: true,
-                    login: isAuthenticated().login
-                }
-            });
-        } else {
-            dispatch({
-                type: "SIGNOUT_USER"
-            });
-            sessionStorage.removeItem("token");
-        }
-    }, [dispatch]);
-
     const onSignin = (e, signIn) => {
         e.preventDefault();
         signIn().then(({ data }) => {
@@ -44,7 +27,8 @@ export default function Signin() {
                 type: "SIGNIN_USER",
                 payload: {
                     isAuth: true,
-                    login: isAuthenticated().login
+                    login: isAuthenticated().login,
+                    userId: isAuthenticated().userId
                 }
             });
         });

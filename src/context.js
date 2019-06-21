@@ -3,7 +3,8 @@ import { isAuthenticated } from "./containers/isAuth";
 
 const Context = createContext({
     isAuth: isAuthenticated().isAuth,
-    login: isAuthenticated().login
+    login: isAuthenticated().login,
+    userId: isAuthenticated().userId
 });
 
 export default Context;

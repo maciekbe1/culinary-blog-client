@@ -8,8 +8,9 @@ export const isAuthenticated = () => {
     if (expiresAt !== null) {
         return {
             isAuth: new Date().getTime() < expiresAt.exp * 1000,
-            login: expiresAt.login
+            login: expiresAt.login,
+            userId: expiresAt.id
         };
     }
-    return { isAuth: false, login: null };
+    return { isAuth: false, login: null, userId: null };
 };
