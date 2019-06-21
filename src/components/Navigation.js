@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "../assets/styles/Navigation.scss";
 import logo from "../assets/images/logo.png";
 
@@ -9,14 +9,12 @@ import Signin from "./Auth/Signin";
 export default function Navigation(props) {
     const context = useContext(Context);
     const { dispatch } = useContext(Context);
-    const onSignOut = () => {
+    const onSignout = () => {
         dispatch({
-            type: "SIGNOUT_USER",
-            payload: {
-                isAuth: false,
-                currentUser: null
-            }
+            type: "SIGNOUT_USER"
         });
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("login");
     };
 
     return (
@@ -55,16 +53,24 @@ export default function Navigation(props) {
                                     </span>
                                 </a>
                             ) : null}
-                            <li className="nav-item active">
-                                <Link className="nav-link" to="/posts">
+                            <li className="nav-item">
+                                <NavLink
+                                    className="nav-link"
+                                    to="/posts"
+                                    activeClassName="active"
+                                >
                                     Posty{" "}
                                     <span className="sr-only">(current)</span>
-                                </Link>
+                                </NavLink>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/">
+                                <NavLink
+                                    className="nav-link"
+                                    to="/about"
+                                    activeclassname="active"
+                                >
                                     O nas
-                                </Link>
+                                </NavLink>
                             </li>
                             <li className="nav-item dropdown">
                                 <Link
@@ -107,7 +113,7 @@ export default function Navigation(props) {
                                     ) : (
                                         <button
                                             className="dropdown-item"
-                                            onClick={onSignOut}
+                                            onClick={onSignout}
                                         >
                                             Wyloguj
                                         </button>

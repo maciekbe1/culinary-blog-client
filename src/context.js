@@ -1,9 +1,9 @@
 import { createContext } from "react";
+import { isAuthenticated } from "./containers/isAuth";
 
 const Context = createContext({
-    isAuth: false,
-    token: null,
-    login: null
+    isAuth: isAuthenticated().isAuth,
+    login: isAuthenticated().login
 });
 
 export default Context;

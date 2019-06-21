@@ -40,7 +40,7 @@ function App(props) {
 
     const authLink = setContext((_, { headers }) => {
         // get the authentication token from local storage if it exists
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
         // return the headers to the context so httpLink can read them
         return {
             headers: {
@@ -57,8 +57,8 @@ function App(props) {
 
     return (
         <Context.Provider value={{ state, dispatch }}>
-            <ApolloProvider client={client}>
-                <BrowserRouter>
+            <BrowserRouter>
+                <ApolloProvider client={client}>
                     <div className="App container-fluid dark-theme">
                         <Navigation />
                         <Switch>
@@ -73,8 +73,8 @@ function App(props) {
                         </Switch>
                         <Footer />
                     </div>
-                </BrowserRouter>
-            </ApolloProvider>
+                </ApolloProvider>
+            </BrowserRouter>
         </Context.Provider>
     );
 }

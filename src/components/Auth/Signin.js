@@ -3,13 +3,11 @@ import Context from "../../context";
 import Error from "../Error";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
+import { isAuthenticated } from "../../containers/isAuth";
 const SIGNIN_QUERY = gql`
     mutation signInMutation($login: String!, $password: String!) {
         signIn(login: $login, password: $password) {
-            userId
-            login
             token
-            tokenExp
         }
     }
 `;
@@ -17,22 +15,23 @@ export default function Signin() {
     const { dispatch } = useContext(Context);
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
-    // const [loginFailure, setLoginFailure] = useState(false);
-    // const [loading, setLoading] = useState(false);
-    // const [user, setUser] = useState(null);
-    const sessionToken = sessionStorage.getItem("token");
-    const sessionLogin = sessionStorage.getItem("login");
+
     useEffect(() => {
-        if (sessionToken) {
+        if (isAuthenticated().isAuth) {
             dispatch({
-                type: "IS_AUTH",
+                type: "SIGNIN_USER",
                 payload: {
                     isAuth: true,
-                    login: sessionLogin
+                    login: isAuthenticated().login
                 }
             });
+        } else {
+            dispatch({
+                type: "SIGNOUT_USER"
+            });
+            sessionStorage.removeItem("token");
         }
-    }, [dispatch, sessionToken, sessionLogin]);
+    }, [dispatch]);
 
     const onSignin = (e, signIn) => {
         e.preventDefault();
@@ -41,13 +40,11 @@ export default function Signin() {
             setLogin("");
             document.querySelector("#closeLoginModal").click();
             sessionStorage.setItem("token", data.signIn.token);
-            sessionStorage.setItem("login", data.signIn.login);
             dispatch({
                 type: "SIGNIN_USER",
                 payload: {
                     isAuth: true,
-                    token: data.signIn.token,
-                    login: data.signIn.login
+                    login: isAuthenticated().login
                 }
             });
         });
