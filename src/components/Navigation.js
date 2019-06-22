@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import "../assets/styles/Navigation.scss";
 import logo from "../assets/images/logo.png";
@@ -16,7 +16,10 @@ export default function Navigation(props) {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("login");
     };
-
+    const [currPage, setCurrPage] = useState(1);
+    useEffect(() => {
+        setCurrPage(context.state.currentPostPage);
+    }, [context.state.currentPostPage]);
     return (
         <div className="">
             <nav className="navigation navbar navbar-expand-lg navbar-dark bg-dark">
@@ -56,7 +59,7 @@ export default function Navigation(props) {
                             <li className="nav-item">
                                 <NavLink
                                     className="nav-link"
-                                    to="/posts"
+                                    to={`/posts/${currPage}`}
                                     activeClassName="active"
                                 >
                                     Posty{" "}

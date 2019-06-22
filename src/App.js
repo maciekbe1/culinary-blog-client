@@ -11,7 +11,7 @@ import { withCookies } from "react-cookie";
 //pages
 import Homepage from "./pages/Homepage";
 import ProtectedRoute from "./pages/ProtectedRoute";
-import Posts from "./pages/Posts";
+import AllPosts from "./pages/AllPosts";
 import Panel from "./pages/Panel";
 
 //components
@@ -68,7 +68,7 @@ function App(props) {
                                 render={render => <Homepage {...render} />}
                             />
                             <Route path="/posts/post/:id" component={Post} />
-                            <Route path="/posts" component={Posts} />
+                            <Route path="/posts/:id" component={AllPosts} />
                             <ProtectedRoute path="/panel" component={Panel} />
                         </Switch>
                         <Footer />

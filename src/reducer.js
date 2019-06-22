@@ -14,6 +14,11 @@ export default function reducer(state, { type, payload }) {
                 login: null,
                 userId: null
             };
+        case "CURRENT_POST_PAGE":
+            return {
+                ...state,
+                currentPostPage: payload
+            };
         default:
             return state;
     }
