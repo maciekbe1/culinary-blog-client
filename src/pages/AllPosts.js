@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import "../assets/styles/AllPosts.scss";
 import PostThumbnail from "../components/Posts/PostThumbnail";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Context from "../context";
-
+import MyPagination from "../components/MyPagination";
 const POSTS_QUERY = gql`
     query getAllPosts($first: Int!, $skip: Int!) {
         AllPosts(first: $first, skip: $skip) {
@@ -23,16 +23,16 @@ const POSTS_QUERY = gql`
 `;
 
 export default function AllPosts(props) {
-    const [pages, setPages] = useState(0);
-    let skip = props.match.params.id - 1;
+    // const [pages, setPages] = useState(0);
+    let pageId = props.match.params.id;
 
     const { dispatch } = useContext(Context);
     useEffect(() => {
         dispatch({
             type: "CURRENT_POST_PAGE",
-            payload: props.match.params.id
+            payload: pageId
         });
-    }, [dispatch, props.match.params.id]);
+    }, [dispatch, pageId]);
     return (
         <div className="post-list">
             <div className="container">
@@ -56,29 +56,35 @@ export default function AllPosts(props) {
                             query={POSTS_QUERY}
                             variables={{
                                 first: 2,
-                                skip: skip + 1
+                                skip: (pageId - 1) * 2
                             }}
                         >
                             {({ loading, error, data }) => {
                                 if (loading) return <h4>Loading...</h4>;
                                 if (error) console.log(error);
-                                setPages(data.AllPosts.postCount);
+                                // setPages(data.AllPosts.postCount);
                                 // console.log(data);
                                 return (
                                     <>
                                         <PostThumbnail
-                                            entries={data.AllPosts.posts || []}
+                                            entries={data.AllPosts.posts}
                                         />
-                                        {["1", "2"].map((item, index) => {
+                                        {/* {["1", "2", "3"].map((item, index) => {
                                             return (
-                                                <Link
-                                                    key={index}
-                                                    to={`/posts/${index + 1}`}
-                                                >
-                                                    page {index + 1}
-                                                </Link>
+                                                // <Link
+                                                //     key={index}
+                                                //     to={`/posts/${index + 1}`}
+                                                // >
+                                                //     page {index + 1}
+                                                // </Link>
                                             );
-                                        })}
+                                        })} */}
+                                        <MyPagination
+                                            total={data.AllPosts.postCount}
+                                            pathname={"posts"}
+                                            itemsOnPage={2}
+                                            page={parseInt(pageId, 10)}
+                                        />
                                     </>
 
                                     // <>
