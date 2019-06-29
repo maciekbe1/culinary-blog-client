@@ -3,7 +3,6 @@ import "../assets/styles/AllPosts.scss";
 import PostThumbnail from "../components/Posts/PostThumbnail";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
-// import { Link } from "react-router-dom";
 import Context from "../context";
 import MyPagination from "../components/MyPagination";
 const POSTS_QUERY = gql`
@@ -23,7 +22,6 @@ const POSTS_QUERY = gql`
 `;
 
 export default function AllPosts(props) {
-    // const [pages, setPages] = useState(0);
     let pageId = props.match.params.id;
 
     const { dispatch } = useContext(Context);
@@ -62,23 +60,11 @@ export default function AllPosts(props) {
                             {({ loading, error, data }) => {
                                 if (loading) return <h4>Loading...</h4>;
                                 if (error) console.log(error);
-                                // setPages(data.AllPosts.postCount);
-                                // console.log(data);
                                 return (
                                     <>
                                         <PostThumbnail
                                             entries={data.AllPosts.posts}
                                         />
-                                        {/* {["1", "2", "3"].map((item, index) => {
-                                            return (
-                                                // <Link
-                                                //     key={index}
-                                                //     to={`/posts/${index + 1}`}
-                                                // >
-                                                //     page {index + 1}
-                                                // </Link>
-                                            );
-                                        })} */}
                                         <MyPagination
                                             total={data.AllPosts.postCount}
                                             pathname={"posts"}
@@ -86,38 +72,6 @@ export default function AllPosts(props) {
                                             page={parseInt(pageId, 10)}
                                         />
                                     </>
-
-                                    // <>
-                                    //     {data.AllPosts.map((item, index) => {
-                                    //         return (
-                                    //             <PostThumbnail
-                                    //                 key={index}
-                                    //                 data={item}
-                                    //             />
-                                    //         );
-                                    //     })}
-                                    //     <button
-                                    //         type="button"
-                                    //         onClick={() =>
-                                    //             fetchMore({
-                                    //                 variables: {
-                                    //                     first: 1,
-                                    //                     skip: 2
-                                    //                 },
-                                    //                 updateQuery: (
-                                    //                     previousResult,
-                                    //                     { fetchMoreResult }
-                                    //                 ) => {
-                                    //                     console.log(
-                                    //                         fetchMoreResult
-                                    //                     );
-                                    //                 }
-                                    //             })
-                                    //         }
-                                    //     >
-                                    //         More
-                                    //     </button>
-                                    // </>
                                 );
                             }}
                         </Query>

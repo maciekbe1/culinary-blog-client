@@ -49,7 +49,6 @@ export default function PostThumbnail(props) {
                     </div>
                 );
             })}
-            {/* <button onClick={props.onLoadMore}>Load more</button> */}
         </div>
     );
 }
