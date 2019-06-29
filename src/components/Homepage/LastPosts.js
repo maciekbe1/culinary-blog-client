@@ -5,8 +5,8 @@ import { Query } from "react-apollo";
 import image from "../../assets/images/posts/post1.png";
 
 const POSTS_QUERY = gql`
-    query getAllPosts($first: Int!, $skip: Int!) {
-        AllPosts(first: $first, skip: $skip) {
+    query getAllPosts($first: Int!, $skip: Int!, $search: String!) {
+        AllPosts(first: $first, skip: $skip, search: $search) {
             posts {
                 _id
                 title
@@ -24,7 +24,8 @@ export default function LastPosts() {
                     query={POSTS_QUERY}
                     variables={{
                         first: 3,
-                        skip: 0
+                        skip: 0,
+                        search: ""
                     }}
                 >
                     {({ loading, error, data }) => {

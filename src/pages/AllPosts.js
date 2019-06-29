@@ -1,4 +1,5 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import "../assets/styles/AllPosts.scss";
 import PostThumbnail from "../components/Posts/PostThumbnail";
 import gql from "graphql-tag";
@@ -6,8 +7,8 @@ import { Query } from "react-apollo";
 import Context from "../context";
 import MyPagination from "../components/MyPagination";
 const POSTS_QUERY = gql`
-    query getAllPosts($first: Int!, $skip: Int!) {
-        AllPosts(first: $first, skip: $skip) {
+    query getAllPosts($first: Int!, $skip: Int!, $search: String!) {
+        AllPosts(first: $first, skip: $skip, search: $search) {
             posts {
                 _id
                 title
@@ -23,14 +24,19 @@ const POSTS_QUERY = gql`
 
 export default function AllPosts(props) {
     let pageId = props.match.params.id;
-
     const { dispatch } = useContext(Context);
+    const [postInput, setPostInput] = useState("");
+    const [postName, setPostName] = useState("");
+    const itemsOnPage = 2;
     useEffect(() => {
         dispatch({
             type: "CURRENT_POST_PAGE",
             payload: pageId
         });
     }, [dispatch, pageId]);
+    const getResoults = () => {
+        setPostName(postInput);
+    };
     return (
         <div className="post-list">
             <div className="container">
@@ -40,12 +46,24 @@ export default function AllPosts(props) {
                         <div className="filters border border-secondary p-3">
                             <h2>Filtry:</h2>
                             <div className="mt-3">
-                                <p>Miasto:</p>
+                                <p>Nazwa postu:</p>
                                 <input
                                     className="w-100"
                                     type="text"
-                                    name="city"
+                                    name="postName"
+                                    onChange={event =>
+                                        setPostInput(event.target.value)
+                                    }
+                                    value={postInput}
                                 />
+                                <Link
+                                    className="btn"
+                                    to={"/posts/1"}
+                                    type="button"
+                                    onClick={getResoults}
+                                >
+                                    Filter
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -53,8 +71,9 @@ export default function AllPosts(props) {
                         <Query
                             query={POSTS_QUERY}
                             variables={{
-                                first: 2,
-                                skip: (pageId - 1) * 2
+                                first: itemsOnPage,
+                                skip: (pageId - 1) * itemsOnPage,
+                                search: postName
                             }}
                         >
                             {({ loading, error, data }) => {
@@ -65,12 +84,15 @@ export default function AllPosts(props) {
                                         <PostThumbnail
                                             entries={data.AllPosts.posts}
                                         />
-                                        <MyPagination
-                                            total={data.AllPosts.postCount}
-                                            pathname={"posts"}
-                                            itemsOnPage={2}
-                                            page={parseInt(pageId, 10)}
-                                        />
+                                        {data.AllPosts.postCount >
+                                        itemsOnPage ? (
+                                            <MyPagination
+                                                total={data.AllPosts.postCount}
+                                                pathname={"posts"}
+                                                itemsOnPage={itemsOnPage}
+                                                page={parseInt(pageId, 10)}
+                                            />
+                                        ) : null}
                                     </>
                                 );
                             }}

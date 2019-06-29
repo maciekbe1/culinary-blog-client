@@ -36,6 +36,7 @@ function App(props) {
     // });
     const httpLink = createHttpLink({
         uri: process.env.REACT_APP_API
+        // uri: "http://localhost:4000/graphql"
     });
 
     const authLink = setContext((_, { headers }) => {

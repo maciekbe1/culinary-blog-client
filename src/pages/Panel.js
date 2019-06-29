@@ -2,8 +2,13 @@ import React from "react";
 
 export default function Panel() {
     return (
-        <div>
-            <h2>Hello from panel</h2>
+        <div className="">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-3">hello from post option</div>
+                    <div className="col-lg-9">hello from posts list</div>
+                </div>
+            </div>
         </div>
     );
 }
